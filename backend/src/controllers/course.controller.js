@@ -1,36 +1,38 @@
 import CourseService from '../services/course.services.js';
 
-export const getUserCourses = async (req, res) => {
+export const getUserCourses = async (req, res, next) => {
   const user = req.user;
   console.log(user);
   try {
     const courses = await CourseService.getAll(user._id);
     res.json(courses);
   } catch (err) {
-    res.send(err.message);
+    next(err);
   }
 };
 
-export const create = async (req, res) => {
+export const create = async (req, res, next) => {
   const user = req.user;
   try {
     const course = await CourseService.createCourse(req.body, user._id);
     console.log(course);
     res.status(201).json(course);
   } catch (err) {
-    console.log(err.message);
+    next(err);
   }
 };
 
-export const deleteCourse = async (req, res) => {
+export const deleteCourse = async (req, res, next) => {
   const user = req.user;
   try {
     await CourseService.deleteCourse(req.params['code'], user._id);
     res.sendStatus(204);
-  } catch (err) {}
+  } catch (err) {
+    next(err);
+  }
 };
 
-export const updateCourse = async (req, res) => {
+export const updateCourse = async (req, res, next) => {
   const user = req.user;
   try {
     const updated = await CourseService.updateCourse(
@@ -40,16 +42,16 @@ export const updateCourse = async (req, res) => {
     );
     res.status(200).json(updated);
   } catch (err) {
-    console.log(error);
+    next(err);
   }
 };
 
-export const getCourse = async (req, res) => {
+export const getCourse = async (req, res, next) => {
   const user = req.user;
   try {
     const course = await CourseService.getCourse(req.params['code'], user._id);
     res.json(course);
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };

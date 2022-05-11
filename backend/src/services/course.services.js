@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
+
 import Course from '../models/course.model.js';
+import { BadRequestError, NotFoundError } from '../helpers/apiError.js';
 
 const createCourse = async (course, userId) => {
   try {
@@ -9,37 +11,48 @@ const createCourse = async (course, userId) => {
     });
     newCourse = await newCourse.save();
     return newCourse;
-  } catch (e) {}
+  } catch (e) {
+    throw new BadRequestError(
+      'Something is wrong with information you provided'
+    );
+  }
 };
 
 const getAll = async (userId) => {
-  try {
-    const courses = await Course.find({ user_id: userId });
-    return courses;
-  } catch (err) {}
+  const courses = await Course.find({ user_id: userId });
+  if (!courses) {
+    throw new NotFoundError('No courses found!');
+  }
+  return courses;
 };
 
 const getCourse = async (code, userId) => {
-  try {
-    const course = await Course.findOne({ code: code, user_id: userId });
-    return course;
-  } catch (err) {}
+  const course = await Course.findOne({ code: code, user_id: userId });
+  if (!course) {
+    throw new NotFoundError(`Course ${code} not found!`);
+  }
+  return course;
 };
 
 const deleteCourse = async (courseCode, userId) => {
-  try {
-    await Course.findOneAndDelete({ code: courseCode, user_id: userId });
-  } catch (err) {}
+  const deleted = await Course.findOneAndDelete({
+    code: courseCode,
+    user_id: userId,
+  });
+  if (!deleted) {
+    throw new NotFoundError(`Course ${code} not found!`);
+  }
 };
 
 const updateCourse = async (courseCode, userId, update) => {
-  try {
-    const updated = Course.findOneAndUpdate(
-      { code: courseCode, user_id: userId },
-      update
-    );
-    return updated;
-  } catch (err) {}
+  const updated = Course.findOneAndUpdate(
+    { code: courseCode, user_id: userId },
+    update
+  );
+  if (!updated) {
+    throw new NotFoundError(`Course ${code} not found!`);
+  }
+  return updated;
 };
 
 export default { getAll, deleteCourse, getCourse, createCourse, updateCourse };

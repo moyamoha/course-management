@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import User from '../models/user.model.js';
 import userServices from '../services/user.services.js';
+import { JWT_SECRET } from '../utils/secrets.js';
 
 export const registerUser = async (req, res) => {
   const { username, lastname, firstname, password1, password2, email } =
@@ -59,7 +60,7 @@ export const login = async (req, res) => {
             username: user.username,
             email: user.email,
           }),
-          process.env.ACCESS_TOKEN_SECRET
+          JWT_SECRET
         );
         res.status(200).json({
           token: token,

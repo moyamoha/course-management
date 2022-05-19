@@ -9,11 +9,11 @@ export const registerUser = async (req, res) => {
   const { username, lastname, firstname, password1, password2, email } =
     req.body;
   if (password1 !== password2) {
-    res.json({ error: 'Passwords should match' });
+    res.status(400).json({ message: 'Passwords should match' });
     return;
   }
   if (password1.length < 10) {
-    res.json({ error: 'Password is too short' });
+    res.status(400).json({ message: 'Password is too short' });
     return;
   }
 
@@ -35,7 +35,7 @@ export const registerUser = async (req, res) => {
     });
     res.sendStatus(201);
   } catch (err) {
-    res.sendStatus(403);
+    res.sendStatus(401).json({ message: 'Please provide correct information' });
   }
 };
 
@@ -47,8 +47,8 @@ export const login = async (req, res) => {
       username: username,
     });
     if (!user) {
-      res.json({
-        error: 'Wrong credentials. Please check your username and password',
+      res.status(401).json({
+        message: 'Wrong credentials. Please check your username and password',
       });
       return;
     }
@@ -64,10 +64,11 @@ export const login = async (req, res) => {
         );
         res.status(200).json({
           token: token,
+          user: user,
         });
       }
     } catch (err) {
-      res.json({ error: 'Password is incorrect' });
+      res.status(401).json({ message: 'Password is incorrect' });
     }
   } catch (err) {
     res.sendStatus(500);

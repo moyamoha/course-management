@@ -1,4 +1,9 @@
 import CourseService from '../services/course.services.js';
+import fs from 'fs';
+import path from 'path';
+import { promisify } from 'util';
+
+const writeFile = promisify(fs.writeFile);
 
 export const getUserCourses = async (req, res, next) => {
   const user = req.user;
@@ -49,6 +54,25 @@ export const getCourse = async (req, res, next) => {
   try {
     const course = await CourseService.getCourse(req.params['code'], user._id);
     res.json(course);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const sendJson = async (req, res, next) => {
+  const home = process.cwd();
+  const user = req.user;
+  const fileName = user.username + '_data.json';
+  const filePath = path.join(home, fileName);
+  try {
+    const courses = await CourseService.getAll(user._id);
+    await writeFile(filePath, JSON.stringify(courses));
+    const stream = fs.createReadStream(filePath);
+    res.set({
+      'Content-Disposition': `attachment; filename='${fileName}'`,
+      'Content-Type': 'application/json',
+    });
+    stream.pipe(res);
   } catch (err) {
     next(err);
   }

@@ -11,6 +11,7 @@ import { jwtStrategy } from './config/passport.js';
 import apiContentType from './middlewares/apiContentType.js';
 import { MONGODB_URI } from './utils/secrets.js';
 import logRequest from './middlewares/logRequest.js';
+import { sendJson } from './controllers/course.controller.js';
 
 dotenv.config();
 const app = express();
@@ -33,6 +34,12 @@ passport.use(jwtStrategy);
 // Routes
 app.use('/api/v1/courses', courseRouter);
 app.use('/api/v1/auth', authRouter);
+app.get(
+  '/api/v1/download',
+  passport.authenticate('jwt', { session: false }),
+  cors({ exposedHeaders: ['Content-Disposition'] }),
+  sendJson
+);
 
 // Custom Api error handler
 

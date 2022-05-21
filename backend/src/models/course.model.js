@@ -24,10 +24,6 @@ const courseSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  type: {
-    type: String,
-    required: true,
-  },
   scale: {
     type: String,
     enum: ['Hylätty-Hyväksytty', 'Yleinen asteikko, 0-5'],

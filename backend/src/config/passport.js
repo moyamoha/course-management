@@ -13,7 +13,7 @@ export const jwtStrategy = new JwtStrategy.Strategy(
       const user = await User.findOne({ email: payload.email });
       done(null, user);
     } catch (err) {
-      // done(new UnauthorizedError('You are not logged in'), null)
+      done(new UnauthorizedError('You are not logged in'), null);
     }
   }
 );

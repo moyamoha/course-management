@@ -57,14 +57,13 @@ export const login = async (req, res) => {
         const token = jwt.sign(
           JSON.stringify({
             _id: user._id,
-            username: user.username,
+            name: user.firstname + ' ' + user.lastname,
             email: user.email,
           }),
           JWT_SECRET
         );
         res.status(200).json({
           token: token,
-          user: user,
         });
       }
     } catch (err) {

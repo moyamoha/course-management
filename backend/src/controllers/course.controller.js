@@ -2,7 +2,6 @@ import CourseService from '../services/course.services.js';
 
 export const getUserCourses = async (req, res, next) => {
   const user = req.user;
-  console.log(user);
   try {
     const courses = await CourseService.getAll(user._id);
     res.json(courses);
@@ -15,7 +14,6 @@ export const create = async (req, res, next) => {
   const user = req.user;
   try {
     const course = await CourseService.createCourse(req.body, user._id);
-    console.log(course);
     res.status(201).json(course);
   } catch (err) {
     next(err);

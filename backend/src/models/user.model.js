@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema({
     minlength: 10,
     required: true,
   },
+  profile: {
+    type: String,
+    required: false,
+  },
 });
 
 const userModel = mongoose.model('User', userSchema);

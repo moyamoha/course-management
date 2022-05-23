@@ -13,4 +13,15 @@ const createUser = async (user) => {
   }
 };
 
-export default { createUser };
+const updateUser = async (user) => {
+  try {
+    let newUser = await User.findByIdAndUpdate(user._id, user, {
+      returnNewDocument: true,
+    });
+    return await newUser;
+  } catch (err) {
+    throw new BadRequestError('Could not update the user');
+  }
+};
+
+export default { createUser, updateUser };

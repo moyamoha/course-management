@@ -1,4 +1,4 @@
-# frontend
+# example
 
 ## Project setup
 ```

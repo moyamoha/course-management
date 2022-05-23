@@ -66,7 +66,16 @@ export const sendJson = async (req, res, next) => {
   const filePath = path.join(home, fileName);
   try {
     const courses = await CourseService.getAll(user._id);
-    await writeFile(filePath, JSON.stringify(courses));
+    const content = {
+      _id: user._id,
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      dateJoined: user.dateJoined,
+      courses: [...courses],
+    };
+    await writeFile(filePath, JSON.stringify(content));
     const stream = fs.createReadStream(filePath);
     res.set({
       'Content-Disposition': `attachment; filename='${fileName}'`,

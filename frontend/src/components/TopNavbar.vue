@@ -3,39 +3,41 @@
     >
       <v-toolbar dense dark elevation="0">
         <v-toolbar-title>
-          <v-btn elevation="0" text class="no-hover">Course Manager</v-btn>
+          <v-app-bar-nav-icon>
+            <v-img src="@/assets/logo.png" id="site-logo" width="50px" height="50px"></v-img>
+          </v-app-bar-nav-icon>
+          <v-btn elevation="0" text class="no-hover" @click="goToHomePage">Course Manager</v-btn>
         </v-toolbar-title>
         <div class="flex">
-          <v-btn @click="exam" text small>Contact</v-btn>
+          <v-btn @click="goToContacts" text small>Contact</v-btn>
         </div>
-  
         <v-spacer></v-spacer>
-  
-        <v-btn icon>
-          <v-icon @click="exam">mdi-login</v-icon>
-        </v-btn>
       </v-toolbar>
     </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
+import router from '@/router'
 
-    }
-  }, 
-  methods: {
-    exam() {
-      console.log("Just to test")
+  export default {
+    methods: {
+      goToContacts() {
+        console.log("Just to test")
+      },
+      goToHomePage() {
+        router.push("/")
+      }
     }
   }
-}
 </script>
 
 
 <style>
-.no-hover::before {
-  display: none;
-}
+  .no-hover::before {
+    display: none;
+  }
+
+  #site-logo {
+    border-width: 50%;
+  }
 </style>

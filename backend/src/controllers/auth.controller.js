@@ -1,9 +1,15 @@
 import bcrypt from 'bcrypt';
+import fs from 'fs';
+import util from 'util';
 import jwt from 'jsonwebtoken';
+import { PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 
 import User from '../models/user.model.js';
-import userServices from '../services/user.services.js';
-import { JWT_SECRET } from '../utils/secrets.js';
+import UserServices from '../services/user.services.js';
+import { BUCKET_NAME, JWT_SECRET } from '../utils/secrets.js';
+import s3Client from '../config/s3.js';
+
+const unlinkFile = util.promisify(fs.unlink);
 
 export const registerUser = async (req, res) => {
   const { username, lastname, firstname, password1, password2, email } =
@@ -25,7 +31,7 @@ export const registerUser = async (req, res) => {
     return;
   }
   try {
-    await userServices.createUser({
+    await UserServices.createUser({
       username: username,
       lastname: lastname,
       firstname: firstname,
@@ -59,6 +65,8 @@ export const login = async (req, res) => {
             _id: user._id,
             name: user.firstname + ' ' + user.lastname,
             email: user.email,
+            dateJoined: user.dateJoined,
+            profile: user.profile,
           }),
           JWT_SECRET
         );
@@ -71,5 +79,40 @@ export const login = async (req, res) => {
     }
   } catch (err) {
     res.sendStatus(500);
+  }
+};
+
+export const setProfile = async (req, res, next) => {
+  const img = req.file;
+  const user = req.user;
+  const key = user.username + '_' + img.originalname;
+  try {
+    const fileStream = fs.createReadStream(img.path);
+    const params = {
+      Key: key,
+      Body: fileStream,
+      Bucket: BUCKET_NAME,
+    };
+    await s3Client.send(new PutObjectCommand(params));
+    await unlinkFile(img.path);
+    user.profile = key;
+    const updated = await UserServices.updateUser(user);
+    res.json(updated);
+  } catch (err) {
+    res.sendStatus(500).json({ message: 'Could not upload image' });
+  }
+};
+
+export const getProfile = async (req, res, next) => {
+  try {
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: req.params.key,
+    };
+    const command = new GetObjectCommand(params);
+    const awsRes = await s3Client.send(command);
+    awsRes.Body.pipe(res);
+  } catch (err) {
+    next(err);
   }
 };

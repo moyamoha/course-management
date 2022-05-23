@@ -2,7 +2,7 @@
   <v-expansion-panels flat light class="py-0">
     <v-expansion-panel class="profile mb-3 px-0" @click="expanded = !expanded">
       <v-expansion-panel-header class="px-2 py-0">
-        <v-avatar size="40"><img :src="imgSrc"/></v-avatar>
+        <v-avatar size="40"><img :src="profilePicUrl"/></v-avatar>
         <span>{{loggedInUser.name}}</span>
       </v-expansion-panel-header>
       <v-expansion-panel-content class=".profile-panel-content">
@@ -34,10 +34,7 @@
       }
     },
     computed: {
-      ...mapGetters(['loggedInUser']),
-      imgSrc() {
-        return 'http://localhost:4000/api/v1/auth/images/' + this.loggedInUser.profile
-      }
+      ...mapGetters(['loggedInUser', 'profilePicUrl']),
     }
   }
 </script>

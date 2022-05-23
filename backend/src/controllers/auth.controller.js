@@ -3,6 +3,7 @@ import fs from 'fs';
 import util from 'util';
 import jwt from 'jsonwebtoken';
 import { PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 import User from '../models/user.model.js';
 import UserServices from '../services/user.services.js';
@@ -85,7 +86,7 @@ export const login = async (req, res) => {
 export const setProfile = async (req, res, next) => {
   const img = req.file;
   const user = req.user;
-  const key = user.username + '_' + img.originalname;
+  const key = user.username + '_profile.' + img.mimetype.split('/')[1];
   try {
     const fileStream = fs.createReadStream(img.path);
     const params = {
@@ -94,10 +95,14 @@ export const setProfile = async (req, res, next) => {
       Bucket: BUCKET_NAME,
     };
     await s3Client.send(new PutObjectCommand(params));
+    const getCommand = new GetObjectCommand({ Key: key, Bucket: BUCKET_NAME });
+    const signedUrl = await getSignedUrl(s3Client, getCommand, {
+      expiresIn: 2 * 24 * 60 * 60,
+    });
     await unlinkFile(img.path);
     user.profile = key;
     const updated = await UserServices.updateUser(user);
-    res.json(updated);
+    res.json({ user: updated, profileUrl: signedUrl });
   } catch (err) {
     res.sendStatus(500).json({ message: 'Could not upload image' });
   }
@@ -109,9 +114,11 @@ export const getProfile = async (req, res, next) => {
       Bucket: BUCKET_NAME,
       Key: req.params.key,
     };
-    const command = new GetObjectCommand(params);
-    const awsRes = await s3Client.send(command);
-    awsRes.Body.pipe(res);
+    const getCommand = new GetObjectCommand(params);
+    const url = await getSignedUrl(s3Client, getCommand, {
+      expiresIn: 2 * 24 * 60 * 60,
+    });
+    res.json({ url: url });
   } catch (err) {
     next(err);
   }

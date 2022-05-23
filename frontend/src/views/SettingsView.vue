@@ -7,7 +7,7 @@
     </v-row>
     <v-row>
       <v-col md="4" sm="5" class="d-flex flex-column align-center">
-        <img width="100%" height="100%" class="rounded-lg" :src="imageSrc">
+        <img width="100%" height="100%" class="rounded-lg" :src="profilePicUrl">
         <v-file-input prepend-icon="mdi-camera" block hide-input v-model="profileImg" @change="onchange"></v-file-input>
       </v-col>
       <v-col class="d-md-flex" md="8">
@@ -47,10 +47,7 @@ export default {
       }
     },
     computed: {
-      ...mapGetters(["loggedInUser"]),
-      imageSrc() {
-        return "http://localhost:4000/api/v1/auth/images/" + this.loggedInUser.profile
-      }
+      ...mapGetters(["loggedInUser", "profilePicUrl"]),
     },
     components: { ProfileSection },
 }

@@ -21,6 +21,10 @@ authRouter.put(
   setProfile
 );
 
-authRouter.get('/images/:key', getProfile);
+authRouter.get(
+  '/images/:key',
+  passport.authenticate('jwt', { session: false }),
+  getProfile
+);
 
 export default authRouter;

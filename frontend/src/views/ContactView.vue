@@ -1,13 +1,12 @@
 <template>
   <div>
     <p class="text--primary text-subtitle-1 font-weight-medium intro-text">
-      If you have any question about this website or about the developer behind it and their motivation, 
+      If you have any question about this website or about motivations behind it, 
       you can reach out to me via these channels: <br>
       Email: <i><a href="mailto:salimiyahya549@gmail.com">salimiyahya549@gmail.com</a></i> <br>
       Website: <a href="https://yahyasalimi.netlify.app/" target="_blank">Yahya Salimi</a>
     </p>
     <div class="text--primary text-subtitle-1 font-weight-medium intro-text">
-      Or Via social media: <br>
       <a href="https://www.linkedin.com/in/yahya-salimi-6496391a8/" target="_blank" class="mr-3">
         <v-icon color="primary">mdi-linkedin</v-icon>
       </a>

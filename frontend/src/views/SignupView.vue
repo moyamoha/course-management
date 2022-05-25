@@ -2,7 +2,7 @@
   <v-container class="mt-5">
     <v-row class="d-flex justify-center">
       <v-col xs="11" sm="8" md="4">
-        <p class="text--primary mb-10">Please login to your account using your username and password</p>
+        <p class="text--primary mb-10">Please fill in the fields and hit signup button to get started</p>
         <v-alert v-show="signupError !== ''" color="red lighten-2" dense dismissible type="error">{{signupError}}</v-alert>
         <v-form class="login-form px-0 py-3" ref="form" @submit="onSubmit">
           <v-text-field label="Username" v-model="newUser.username" dense outlined :rules="[required]"></v-text-field>

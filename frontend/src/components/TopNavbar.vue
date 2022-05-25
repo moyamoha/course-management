@@ -6,7 +6,7 @@
           <v-app-bar-nav-icon>
             <v-img src="@/assets/logo.png" id="site-logo" width="50px" height="50px"></v-img>
           </v-app-bar-nav-icon>
-          <v-btn elevation="0" text @click="goToHomePage">Course Manager</v-btn>
+          <v-btn elevation="0" text @click="goToHomePage" small>Course Manager</v-btn>
         </v-toolbar-title>
         <div class="flex">
           <v-btn @click="goToContacts" text small>Contact</v-btn>

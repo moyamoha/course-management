@@ -10,7 +10,7 @@
         </thead>
         <tbody>
           <tr v-for="course in allCourses" :key="course.code">
-            <td>{{course.name}}</td>
+            <td> <router-link :to="'/dashboard/course/' + course.code">{{course.name}}</router-link> </td>
             <td>{{course.code}}</td>
             <td>{{course.level}}</td>
             <td>{{course.scope}}</td>

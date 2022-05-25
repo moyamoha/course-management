@@ -6,7 +6,6 @@
         <v-alert v-show="loginError !== ''" color="red lighten-2" dense dismissible type="error">{{loginError}}</v-alert>
         <v-form class="login-form px-0 py-3" ref="form" lazy-validation @submit="onSubmit">
           <v-text-field
-           clearable
            label="Username"
            v-model="username"
            dense
@@ -15,7 +14,6 @@
           >
           </v-text-field>
           <v-text-field
-           clearable
            label="Password"
            :type="typeOfPassField"
            v-model="password"

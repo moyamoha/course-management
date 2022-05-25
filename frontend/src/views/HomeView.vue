@@ -1,63 +1,36 @@
 <template>
-  <v-sheet class="main-sheet">
-    <v-img src="@/assets/banner.png" v-show="isLargeEnough"></v-img>
-    <v-container class="main-cont d-flex" v-if="!isLargeEnough">
-      <v-row class="d-flex justify-center py-md-12 py-sm-10">
-        <v-col md="6" sm="8" xs="12">
-          <IntroPart></IntroPart>
-        </v-col>
-      </v-row>
-    </v-container>
-    <div v-else class="img-intro">
-      <IntroPart></IntroPart>
-    </div>
-  </v-sheet>
+  <div>
+    <p class="text--primary text-subtitle-1 font-weight-medium intro-text">
+      Keeping track of university courses is hard in a busy life of student, So we made this application to help students manage their courses 
+      easily and keep track of their progress in their studies.
+    </p>
+    <v-btn elevation="1" outlined large @click="getStarted">
+      <span>Get started</span>
+      <v-icon>mdi-arrow-right</v-icon>
+    </v-btn>
+  </div>
 </template>
 
 <script>
-import IntroPart from '@/components/IntroPart.vue';
-const LG = 1264;
+import { mapGetters } from 'vuex'
+import router from '@/router'
 export default {
-  data() {
-    return {
-      isLargeEnough: window.innerWidth >= LG
-    };
-  },
-  created() {
-    window.addEventListener("resize", this.decideImageShow);
-  },
-  destroyed() {
-    window.removeEventListener("resize", this.decideImageShow);
+  computed: {
+    ...mapGetters(['loggedIn'])
   },
   methods: {
-    decideImageShow(e) {
-      if (window.innerWidth >= LG) {
-        this.isLargeEnough = true;
-      }
-      else {
-        this.isLargeEnough = false;
-      }
+    getStarted() {
+      if (this.loggedIn) router.push("/dashboard")
+      else router.push("/login")
     }
   },
-  components: { IntroPart }
 }
 </script>
 
 <style scoped>
-  .main-cont {
-    height: 93vh;
+  .intro-text {
+    letter-spacing: 1.1rem;
+    line-height: 2rem;
+    font-size: 1.05rem;
   }
-  .main-sheet {
-    background-size: contain;
-    height: 94vh;
-    width: 100%
-  }
-  .img-intro {
-    position: absolute;
-    top: 30%;
-    right: 20%;
-    width: 40%;
-  }
-
-
 </style>

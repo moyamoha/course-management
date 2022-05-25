@@ -10,13 +10,25 @@ import LoginView from '../views/LoginView.vue'
 import Stats from '@/views/StatsView.vue'
 import Signup from '@/views/SignupView.vue'
 import SingleCourse from '@/views/SingleCourseView.vue'
+import MainBaseView from '@/views/MainBaseView.vue'
+import Contact from '@/views/ContactView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
 	{
 		path: '/',
-		component: HomeView,
+		component: MainBaseView,
+		children: [
+			{
+				path: '',
+				component: HomeView,
+			},
+			{
+				path: 'contact',
+				component: Contact,
+			},
+		],
 	},
 	{
 		path: '/dashboard',

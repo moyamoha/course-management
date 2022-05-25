@@ -1,24 +1,25 @@
 <template>
-  <div>
+  <v-list class="navlist py-0">
     <ProfileSection />
-    <v-btn tile block text class="action" @click="goToDashboard">Main</v-btn>
-    <v-btn tile block text class="action" @click="goToCurrent">View all</v-btn>
-    <v-btn tile block text class="action text-left" @click="goToNew">Create Course</v-btn>
-    <v-btn tile block text class="action text-left" @click="goToStats">Stats</v-btn>
-    <ExportData></ExportData>
-  </div>
+    <v-list-item @click="goToDashboard">Main</v-list-item>
+    <v-list-item @click="goToAll">View all</v-list-item>
+    <v-list-item @click="goToNew">Create course</v-list-item>
+    <v-list-item @click="goToStats">Stats</v-list-item>
+    <v-list-item @click="importData">Import data</v-list-item>
+  </v-list>
 </template>
 
 <script>
 import router from '@/router'
 import ProfileSection from './ProfileSection.vue'
-import ExportData from './ExportData.vue'
+import { mapActions } from 'vuex'
 export default {
   methods: {
+    ...mapActions(['downloadJson']),
     goToDashboard() {
       router.push("/dashboard")
     },
-    goToCurrent() {
+    goToAll() {
       router.push("/dashboard/all")
     },
     goToNew() {
@@ -26,17 +27,19 @@ export default {
     },
     goToStats() {
       router.push("/dashboard/stats")
+    },
+    importData() {
+      this.downloadJson()
     }
   },
   components: {
     ProfileSection,
-    ExportData
   }
 }
 </script>
 
 <style>
-  .action {
-    background-color: #f3f5f7 !important;
+  .navlist {
+    height: 100% !important;
   }
 </style>

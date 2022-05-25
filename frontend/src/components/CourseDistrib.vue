@@ -29,7 +29,7 @@ export default {
         return prev + currC.scope
       }, 0),
     ]
-    const distribChart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'pie',
         data: {
             labels: ["Not started", "Ongoing", "Accomplished"],

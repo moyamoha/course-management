@@ -48,7 +48,8 @@ const deleteCourse = async (courseCode, userId) => {
 const updateCourse = async (courseCode, userId, update) => {
   const updated = Course.findOneAndUpdate(
     { code: courseCode, user_id: userId },
-    update
+    update,
+    { returnDocument: 'after' }
   );
   if (!updated) {
     throw new NotFoundError(`Course ${code} not found!`);

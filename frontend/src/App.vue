@@ -25,8 +25,7 @@ export default {
 
 <style>
   .actions-panel {
-    background-color: #f3f5f7;
-    border-right: 1px solid #e4e4e4;
+    border-right: 1px solid rgb(218, 218, 218);
     min-height: 100vh;
   }
 </style>

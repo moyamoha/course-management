@@ -1,20 +1,46 @@
 <template>
-  <v-container class="pt-10">
+  <v-container class="content py-10">
     <v-row>
-      <span class="text-subtitle-2">Recent courses</span>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero necessitatibus eligendi explicabo quos quod exercitationem ipsam perferendis molestiae doloribus iusto dicta vel velit facere deserunt, sed, animi totam excepturi cum!</p>
+      <v-col sm="8" md="6" lg="4" xs="10">
+        <p class="text-subtitle-2">Recently active courses</p>
+        <v-carousel v-model="model" cycle :show-arrows="false" progress progress-color="success">
+          <v-carousel-item
+            v-for="course in onGoings"
+            :key="course._id"
+            reverse-transition="fade-transition"
+            transition="fade-transition"
+          >
+            <CourseCard :code="course.code"></CourseCard>
+          </v-carousel-item>
+        </v-carousel>
+      </v-col>
+      <v-col md="3"></v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import CourseCard from '@/components/CourseCard.vue'
 export default {
-  methods: {
-    ...mapActions(['fetchCourses'])
-  },
-  created() {
-    this.fetchCourses()
-  }
+    methods: {
+        ...mapActions(["fetchCourses"])
+    },
+    computed: {
+      ...mapGetters(['allCourses']),
+      onGoings() {
+        return this.allCourses.filter(c => c.state === 'onGoing')
+      }
+    },
+    created() {
+        this.fetchCourses();
+    },
+    components: { CourseCard }
 }
 </script>
+
+<style scoped>
+  .content {
+    height: 100%;
+  }
+</style>

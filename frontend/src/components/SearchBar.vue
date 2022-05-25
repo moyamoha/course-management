@@ -1,9 +1,9 @@
 <template>
   <v-text-field
     prepend-inner-icon="mdi-magnify" 
-    class="mx-2 my-2" 
+    class="mx-2 my-0" 
     placeholder="Search for course"
-    @input="handleChange"
+    v-model="query"
     @click:prepend-inner="handleSubmit"
     @change="handleSubmit"
    >
@@ -17,9 +17,6 @@
       query: ""
     }),
     methods: {
-      handleChange(value) {
-        this.query = value
-      },
       handleSubmit() {
         console.log(this.query)
       }

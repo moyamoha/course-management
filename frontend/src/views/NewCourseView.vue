@@ -3,14 +3,14 @@
     <v-form class="mt-6 px-6 creation-form" ref="form" @submit="onSubmit">
       <v-alert dismissible dense color="red lighten-2" type="error" v-show="courseError !== ''">{{this.courseError}}</v-alert>
       <p class="text-start">Please fill out in the fields</p>
-      <v-text-field clearable v-model="newCourse.name" label="Course name" dense></v-text-field>
-      <v-text-field clearable v-model="newCourse.code" label="Course code" dense></v-text-field>
+      <v-text-field v-model="newCourse.name" label="Course name" dense></v-text-field>
+      <v-text-field v-model="newCourse.code" label="Course code" dense></v-text-field>
       <v-col md="6" sm="12" class="px-0"><v-slider min="1" max="10" dense label="Course scope" v-model="newCourse.scope" thumb-label="always" thumb-color="green"></v-slider></v-col>
       
       <v-col md="6" sm="12" class="px-0">
         <v-select :items="scaleTypes" label="course scale" dense outlined v-model="newCourse.scale"></v-select>
       </v-col>
-      <v-text-field  clearable v-model="newCourse.level" label="Course level" dense></v-text-field>
+      <v-text-field v-model="newCourse.level" label="Course level" dense></v-text-field>
       <v-row align-content="center" class="mt-1">
         <v-col class="d-flex align-center">
           <span>Course language</span>

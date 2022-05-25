@@ -16,10 +16,10 @@ const actions = {
 		const res = await axios.get('/courses/')
 		commit('setCourses', res.data)
 	},
+
 	async addCourseToDb({ commit }, course) {
 		try {
 			const res = await axios.post('/courses/', course)
-			console.log(res)
 			if (res.status === 201) {
 				commit('addCourse', res.data)
 				commit('setCourseError', '')
@@ -32,9 +32,49 @@ const actions = {
 			)
 		}
 	},
-	async deleteCourseFromDb({ commit }, code) {
-		const res = await axios.delete('/courses/' + code)
+
+	async deleteCourseFromDb({ commit, state }, code) {
+		try {
+			axios.delete('/courses/' + code)
+			const indOfDeleted = state.courses.map((c) => c.code).indexOf(code)
+			commit('deleteCourse', indOfDeleted)
+			commit('setCourseError', '')
+			router.push('/dashboard/all')
+		} catch (err) {
+			console.log(err)
+			commit('setCourseError', err.response.data.message)
+		}
 	},
+
+	async markCourseAsAccomplished({ commit, state }, { code, result }) {
+		try {
+			const indOfModified = state.courses.map((c) => c.code).indexOf(code)
+			const res = await axios.put('/courses/' + code, {
+				...state.courses[indOfModified],
+				result: result,
+				state: 'accomplished',
+			})
+			commit('changeCourse', { index: indOfModified, course: res.data })
+			commit('setCourseError', '')
+		} catch (err) {
+			commit('setCourseError', err.response.data.message)
+		}
+	},
+
+	async startCourse({ commit, state }, code) {
+		try {
+			const indOfModified = state.courses.map((c) => c.code).indexOf(code)
+			const res = await axios.put('/courses/' + code, {
+				...state.courses[indOfModified],
+				state: 'onGoing',
+			})
+			commit('changeCourse', { index: indOfModified, course: res.data })
+			commit('setCourseError', '')
+		} catch (err) {
+			commit('setCourseError', err.response.data.message)
+		}
+	},
+
 	async downloadJson({ commit }) {
 		try {
 			const response = await axios.get('/download', { responseType: 'blob' })
@@ -59,6 +99,8 @@ const mutations = {
 	setCourses: (state, courses) => (state.courses = courses),
 	addCourse: (state, course) => state.courses.push(course),
 	setCourseError: (state, msg) => (state.courseError = msg),
+	changeCourse: (state, { index, course }) => (state.courses[index] = course),
+	deleteCourse: (state, index) => state.courses.splice(index, 1),
 }
 
 export default {

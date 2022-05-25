@@ -11,8 +11,9 @@
         </v-card>
       </v-dialog >
       <v-row>
-          <v-col sm="3" md="2" class="actions-panel px-0 mt-0">
+          <v-col sm="3" md="2" class="actions-panel pa-0 ma-0">
             <ActionsNav />
+          <v-divider></v-divider>
           </v-col>
           <v-col class="px-0 py-0">
             <router-view></router-view>

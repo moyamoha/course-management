@@ -31,7 +31,7 @@ const courseSchema = mongoose.Schema({
   },
   state: {
     type: String,
-    enum: ['accomplished', 'onGoing', 'notStarted'],
+    enum: ['completed', 'ongoing', 'notStarted'],
     default: 'notStarted',
   },
   result: {

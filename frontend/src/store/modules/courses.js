@@ -46,13 +46,13 @@ const actions = {
 		}
 	},
 
-	async markCourseAsAccomplished({ commit, state }, { code, result }) {
+	async markCourseAsCompleted({ commit, state }, { code, result }) {
 		try {
 			const indOfModified = state.courses.map((c) => c.code).indexOf(code)
 			const res = await axios.put('/courses/' + code, {
 				...state.courses[indOfModified],
 				result: result,
-				state: 'accomplished',
+				state: 'completed',
 			})
 			commit('changeCourse', { index: indOfModified, course: res.data })
 			commit('setCourseError', '')
@@ -66,7 +66,7 @@ const actions = {
 			const indOfModified = state.courses.map((c) => c.code).indexOf(code)
 			const res = await axios.put('/courses/' + code, {
 				...state.courses[indOfModified],
-				state: 'onGoing',
+				state: 'ongoing',
 			})
 			commit('changeCourse', { index: indOfModified, course: res.data })
 			commit('setCourseError', '')

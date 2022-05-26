@@ -29,8 +29,8 @@
         <v-col class="d-flex justify-end">
           <v-btn-toggle dense borderless rounded color="deep-purple accent-4" v-model="newCourse.state">
             <v-btn value="notStarted">Not started</v-btn>
-            <v-btn value="accomplished">Accomplished</v-btn>
-            <v-btn value="onGoing">Ongoing</v-btn>
+            <v-btn value="completed">Completed</v-btn>
+            <v-btn value="ongoing">Ongoing</v-btn>
           </v-btn-toggle>
         </v-col>
       </v-row>
@@ -81,7 +81,7 @@ import { mapActions, mapGetters } from 'vuex'
         return this.newCourse.scale === "Hylätty-Hyväksytty"
       }, 
       courseIsFinished() {
-        return this.newCourse.state === "accomplished"
+        return this.newCourse.state === "completed"
       },
     }
   }

@@ -44,9 +44,9 @@
       chipColor(state) {
         if (state === 'notStarted') {
           return 'primary'
-        } else if (state === 'onGoing') {
+        } else if (state === 'ongoing') {
           return 'orange'
-        } else if (state === 'accomplished') {
+        } else if (state === 'completed') {
           return 'success'
         }
       },

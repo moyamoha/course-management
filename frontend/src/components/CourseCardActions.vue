@@ -3,7 +3,7 @@
     <v-btn color="red lighten-2" class="mr-2" outlined dense small @click="deleteCourse">Delete</v-btn>
     <v-dialog width="300" v-model="dialog">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="success" v-bind="attrs" v-on="on" dense outlined small v-if="course.state === 'onGoing'">Mark as accomplished</v-btn>
+        <v-btn color="success" v-bind="attrs" v-on="on" dense outlined small v-if="course.state === 'ongoing'">Mark as completed</v-btn>
         <v-btn color="success" @click="start" dense outlined small v-else-if="course.state === 'notStarted'">Start course</v-btn>
       </template>
       <v-card class="pa-3">
@@ -27,18 +27,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['markCourseAsAccomplished', 'deleteCourseFromDb', 'startCourse']),
+    ...mapActions(['markCourseAsCompleted', 'deleteCourseFromDb', 'startCourse']),
     deleteCourse() {
       this.deleteCourseFromDb(this.course.code)
     },
     markCourseAsDone() {
-      this.markCourseAsAccomplished({code: this.course.code, result: this.course.result})
+      this.markCourseAsCompleted({code: this.course.code, result: this.course.result})
       this.dialog = false
-      this.changeCourseState("accomplished")
+      this.changeCourseState("completed")
     }, 
     start() {
       this.startCourse(this.course.code)
-      this.changeCourseState("onGoing")
+      this.changeCourseState("ongoing")
     }
   },
   computed: {

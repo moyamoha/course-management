@@ -18,14 +18,14 @@ export default {
     const totalCredits = this.allCourses.reduce((prev, currC) => {
       return prev + currC.scope
     }, 0)
-    const onGoingCreds = this.allCourses.filter(c => c.state === 'onGoing').reduce((prev, currC) => {
+    const ongoingCreds = this.allCourses.filter(c => c.state === 'ongoing').reduce((prev, currC) => {
       return prev + currC.scope
     }, 0)
-    const activeData = [totalCredits - onGoingCreds, onGoingCreds]
+    const activeData = [totalCredits - ongoingCreds, ongoingCreds]
     new Chart(ctx, {
       type: 'pie',
       data: {
-          labels: ["accomplished/notstarted", "Active"],
+          labels: ["completed/notstarted", "Active"],
           datasets: [{
               data: activeData,
               backgroundColor: ['rgba(66, 133, 244, .1)', 'rgba(66, 133, 244, 1)'],

@@ -34,9 +34,9 @@
       chipColor() {
         if (this.props.course.state === 'notStarted') {
           return 'primary'
-        } else if (this.props.course.state === 'onGoing') {
+        } else if (this.props.course.state === 'ongoing') {
           return 'orange'
-        } else if (this.props.course.state === 'accomplished') {
+        } else if (this.props.course.state === 'completed') {
           return 'success'
         }
       }

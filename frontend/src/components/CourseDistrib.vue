@@ -22,17 +22,17 @@ export default {
       this.allCourses.filter(c => c.state === "notStarted").reduce((prev, currC) => {
         return prev + currC.scope
       }, 0),
-      this.allCourses.filter(c => c.state === "onGoing").reduce((prev, currC) => {
+      this.allCourses.filter(c => c.state === "ongoing").reduce((prev, currC) => {
         return prev + currC.scope
       }, 0),
-      this.allCourses.filter(c => c.state === "accomplished").reduce((prev, currC) => {
+      this.allCourses.filter(c => c.state === "completed").reduce((prev, currC) => {
         return prev + currC.scope
       }, 0),
     ]
     new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["Not started", "Ongoing", "Accomplished"],
+            labels: ["Not started", "Ongoing", "Completed"],
             datasets: [{
                 data: data,
                 backgroundColor: ['#4285F4', '#FF9800', '#007E33'],

@@ -5,7 +5,7 @@
         <p class="text-subtitle-2">Recently active courses</p>
         <v-carousel v-model="model" cycle :show-arrows="false" progress progress-color="success">
           <v-carousel-item
-            v-for="course in onGoings"
+            v-for="course in ongoings"
             :key="course._id"
             reverse-transition="fade-transition"
             transition="fade-transition"
@@ -28,8 +28,8 @@ export default {
     },
     computed: {
       ...mapGetters(['allCourses']),
-      onGoings() {
-        return this.allCourses.filter(c => c.state === 'onGoing')
+      ongoings() {
+        return this.allCourses.filter(c => c.state === 'ongoing')
       }
     },
     created() {

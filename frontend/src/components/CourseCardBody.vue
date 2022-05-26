@@ -32,13 +32,13 @@ export default {
   props: ['course'],
   computed: {
     chipColor() {
-      if (this.course.state === 'accomplished') return 'success'
-      else if (this.course.state === 'onGoing') return 'orange'
+      if (this.course.state === 'completed') return 'success'
+      else if (this.course.state === 'ongoing') return 'orange'
       else if (this.course.state === 'notStarted') return 'primary'
       else return 'grey'
     },
     showResult() {
-      return this.course && this.course.state === 'accomplished'
+      return this.course && this.course.state === 'completed'
     }
   }
 }

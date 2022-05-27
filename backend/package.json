@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/app.js",
-    "start": "node src/app.js NODE_ENV='production'"
+    "start": "node src/app.js"
   },
   "keywords": [],
   "author": "",

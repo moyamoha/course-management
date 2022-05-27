@@ -33,7 +33,7 @@ export default {
         return this.allCourses.filter(c => c.state === 'ongoing')
       },
       atLeastOneItem() {
-        return this.ongoings().length > 0
+        return this.allCourses.filter(c => c.state === 'ongoing').length > 0
       }
     },
     created() {

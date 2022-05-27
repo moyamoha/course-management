@@ -5,7 +5,8 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import axios from 'axios'
 
-axios.defaults.baseURL = process.env.BACKEND_BASE_URL
+axios.defaults.baseURL =
+	process.env.BACKEND_BASE_URL || 'https://coumanager-app.herokuapp.com/api/v1'
 axios.interceptors.request.use((request) => {
 	const token = localStorage.getItem('token')
 	if (token) {

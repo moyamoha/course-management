@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import passport from 'passport';
+import path from 'path';
 
 import apiErrorHandler from './middlewares/apiErrorHandler.js';
 import courseRouter from '../src/routers/course.router.js';
@@ -27,9 +28,13 @@ app.listen(4000, () => {
   console.log(`App is running on port ${port}`);
 });
 
+const CWD = process.cwd();
+
 // Passport settings
 app.use(passport.initialize());
 passport.use(jwtStrategy);
+
+app.use(express.static(process.cwd()));
 
 // Routes
 app.use('/api/v1/courses', courseRouter);
@@ -41,9 +46,11 @@ app.get(
   sendJson
 );
 
-// Custom Api error handler
+app.get('/', (req, res) => {
+  res.sendFile(path.join(CWD, 'src/index.html'));
+});
 
-// Connecting to mongodb
+console.log(MONGODB_URI);
 mongoose.connect(MONGODB_URI, () => {
   console.log('connected to database!');
 });

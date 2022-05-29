@@ -50,7 +50,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(CWD, 'src/index.html'));
 });
 
-console.log(MONGODB_URI);
 mongoose.connect(MONGODB_URI, () => {
   console.log('connected to database!');
 });

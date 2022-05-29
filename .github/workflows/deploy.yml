@@ -1,11 +1,9 @@
 name: Build of the project
 on:
   push:
-    -paths:
-      - "!README.md"
-  pull_request:
-    -paths:
-      - "*"
+    paths-ignore:
+      - "README.md"
+      - "**/.gitignore"
 jobs:
   frontend:
     runs-on: ubuntu-latest

@@ -1,5 +1,8 @@
 name: Build of the project
 on: [push, pull_request]
+paths:
+  push:
+    paths-ignore: ["README.md"]
 jobs:
   frontend:
     runs-on: ubuntu-latest

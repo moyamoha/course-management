@@ -1,5 +1,4 @@
 <template>
-  <v-sheet align="start" justify="center">
     <v-form class="mt-6 px-6 creation-form" ref="form" @submit="onSubmit">
       <v-alert dismissible dense color="red lighten-2" type="error" v-show="courseError !== ''">{{this.courseError}}</v-alert>
       <p class="text-start">Please fill out in the fields</p>
@@ -44,7 +43,6 @@
         <v-btn color="success" type="submit" outlined>Save</v-btn>
       </v-card-text>
     </v-form>
-  </v-sheet>
 </template>
 
 <script>

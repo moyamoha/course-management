@@ -15,7 +15,7 @@ So I decided to make my own application to keep track of my school progress. I w
 - Download their data in json format
 - See cool stats about their progress
 
-The main purpose of making this app is however learning. I had heard of how loved framework is Vue among web-developers, so I decided to learn it and see if it deserves all the hype. I soon realized that it deserves it all.
+The main purpose of making this app is however learning. I had heard of how loved framework is Vue among web-developers, so I decided to learn it and see if it deserves all the hype. I soon realized that yes it absolutely does.
 
 ## Technology stack:
 

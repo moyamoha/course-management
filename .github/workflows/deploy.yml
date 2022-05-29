@@ -1,6 +1,11 @@
 name: Build of the project
-on: [push, pull_request]
-paths-ignore: ["README.md"]
+on:
+  push:
+    -paths:
+      - "!README.md"
+  pull_request:
+    -paths:
+      - "*"
 jobs:
   frontend:
     runs-on: ubuntu-latest

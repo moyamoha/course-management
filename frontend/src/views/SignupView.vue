@@ -46,23 +46,23 @@
 						outlined
 						:rules="[required, correctEmail]"></v-text-field>
 					<v-text-field
-						:type="showPassword1"
+						:type="getType"
 						label="Password"
 						v-model="newUser.password1"
 						dense
 						outlined
 						:rules="[required, min10Char]"
-						:append-icon="eyeIcon1"
-						@click:append="showPass1 = !showPass1"></v-text-field>
+						:append-icon="getEyeIcon"
+						@click:append="showPass = !showPass"></v-text-field>
 					<v-text-field
-						:type="showPassword2"
+						:type="getType"
 						label="Repeat password"
 						v-model="newUser.password2"
 						dense
 						outlined
 						:rules="[required, min10Char, matchingPasswords]"
-						:append-icon="eyeIcon2"
-						@click:append="showPass2 = !showPass2"></v-text-field>
+						:append-icon="getEyeIcon"
+						@click:append="showPass = !showPass"></v-text-field>
 					<v-btn color="primary" shaped type="submit">Sign up</v-btn>
 				</v-form>
 				<p class="text--secondary mt-5">
@@ -86,8 +86,7 @@
 				firstname: '',
 				lastname: '',
 			},
-			showPass1: false,
-			showPass2: false,
+			showPass: false,
 		}),
 		methods: {
 			...mapActions(['registerUser']),
@@ -120,17 +119,11 @@
 
 		computed: {
 			...mapGetters(['signupError']),
-			showPassword1() {
-				return this.showPass1 ? 'text' : 'password'
+			getType() {
+				return this.showPass ? 'text' : 'password'
 			},
-			showPassword2() {
-				return this.showPass2 ? 'text' : 'password'
-			},
-			eyeIcon1() {
-				return this.showPass1 ? 'mdi-eye' : 'mdi-eye-off'
-			},
-			eyeIcon2() {
-				return this.showPass2 ? 'mdi-eye' : 'mdi-eye-off'
+			getEyeIcon() {
+				return this.showPass ? 'mdi-eye' : 'mdi-eye-off'
 			},
 		},
 	}

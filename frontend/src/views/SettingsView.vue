@@ -6,7 +6,7 @@
 				adding academy, setting year credit target and so on.
 			</v-col>
 		</v-row>
-		<v-row>
+		<v-row class="d-flex flex-column">
 			<v-col md="4" sm="5" class="d-flex flex-column align-center">
 				<img
 					width="100%"

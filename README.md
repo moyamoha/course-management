@@ -29,7 +29,7 @@ The main purpose of making this app is however learning. I had heard of how love
 8. NodeJs
 9. aws-sdk (s3 bucket for storing profile images)
 10. PassportJs (for authentication)
-11. Github actions (for deploying to netlify and heroku)
+11. Github actions
 
 ## See it in action:
 

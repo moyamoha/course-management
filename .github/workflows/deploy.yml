@@ -29,6 +29,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Coyp toml file to dist folder
+        run: cp netlify.toml dist/netlify.toml
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
         with:

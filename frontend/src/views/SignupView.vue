@@ -63,7 +63,9 @@
 						:rules="[required, min10Char, matchingPasswords]"
 						:append-icon="getEyeIcon"
 						@click:append="showPass = !showPass"></v-text-field>
-					<v-btn color="primary" shaped type="submit">Sign up</v-btn>
+					<v-btn color="primary" shaped type="submit" :loading="processing"
+						>Sign up</v-btn
+					>
 				</v-form>
 				<p class="text--secondary mt-5">
 					Already have an account? <router-link to="/login">Login</router-link>
@@ -87,13 +89,17 @@
 				lastname: '',
 			},
 			showPass: false,
+			processing: false,
 		}),
 		methods: {
 			...mapActions(['registerUser']),
-			onSubmit(e) {
+			async onSubmit(e) {
 				e.preventDefault()
-				if (!this.$refs.form.validate()) return
-				this.registerUser(this.newUser)
+				this.processing = true
+				if (!this.$refs.form.validate()) {
+					await this.registerUser(this.newUser)
+				}
+				this.processing = false
 			},
 			matchingPasswords() {
 				return (

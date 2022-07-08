@@ -35,7 +35,9 @@
 						:append-icon="eyeIcon"
 						@click:append="showPass = !showPass">
 					</v-text-field>
-					<v-btn color="primary" type="submit">Login</v-btn>
+					<v-btn color="primary" type="submit" :loading="processing"
+						>Login</v-btn
+					>
 				</v-form>
 				<p class="text--secondary mt-5">
 					Don't have an account? <router-link to="/signup">Sign up</router-link>
@@ -54,19 +56,20 @@
 			username: '',
 			password: '',
 			showPass: false,
+			processing: false,
 		}),
 		methods: {
 			...mapActions(['loginUser']),
-			onSubmit(e) {
+			async onSubmit(e) {
 				e.preventDefault()
+				this.processing = true
 				if (this.$refs.form.validate()) {
-					this.loginUser({
+					await this.loginUser({
 						username: this.username,
 						password: this.password,
 					})
-				} else {
-					return
 				}
+				this.processing = false
 			},
 			required(v) {
 				return v.length > 0 || 'This field is required'

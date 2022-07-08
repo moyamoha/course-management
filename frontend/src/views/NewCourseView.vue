@@ -93,7 +93,9 @@
 			<v-btn color="purple" class="mr-2" outlined @click="onCancel"
 				>Cancel</v-btn
 			>
-			<v-btn color="success" type="submit" outlined>Save</v-btn>
+			<v-btn color="success" type="submit" outlined :disabled="processing">{{
+				processing ? 'Saving...' : 'Save'
+			}}</v-btn>
 		</v-card-text>
 	</v-form>
 </template>
@@ -115,12 +117,15 @@
 				result: '',
 				state: 'notStarted',
 			},
+			processing: false,
 		}),
 		methods: {
 			...mapActions(['addCourseToDb']),
-			onSubmit(e) {
+			async onSubmit(e) {
+				this.processing = true
 				e.preventDefault()
-				this.addCourseToDb(this.newCourse)
+				await this.addCourseToDb(this.newCourse)
+				this.processing = false
 			},
 			onCancel(e) {
 				this.$refs.form.reset()

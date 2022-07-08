@@ -1,10 +1,7 @@
 <template>
 	<v-container>
 		<v-row class="d-flex pt-10">
-			<v-col>
-				Here you can change your profile picture, email, or other general like
-				adding academy, setting year credit target and so on.
-			</v-col>
+			<v-col> Here you can change your profile picture </v-col>
 		</v-row>
 		<v-row class="d-flex flex-column">
 			<v-col md="4" sm="5" class="d-flex flex-column align-center">

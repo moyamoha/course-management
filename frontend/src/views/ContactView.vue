@@ -11,7 +11,7 @@
 			>
 			<br />
 			Website:
-			<a href="https://yahyasalimi.netlify.app/" target="_blank"
+			<a href="https://yahyasalimi.com/" target="_blank"
 				>Yahya Salimi</a
 			>
 		</p>

@@ -33,4 +33,4 @@ The main purpose of making this app is however learning. I had heard of how love
 
 ## See it in action:
 
-Did this short introduction ignite your interest? See it [here](https://stuhelp.netlify.app)
+Did this short introduction ignite your interest? See it [here](https://student.yahyasalimi.com)

@@ -11,7 +11,7 @@ import authRouter from "./routers/auth.router.js";
 import { jwtStrategy } from "./config/passport.js";
 import apiContentType from "./middlewares/apiContentType.js";
 import logRequest from "./middlewares/logRequest.js";
-// import { sendJson } from "./controllers/course.controller.js";
+import { sendJson } from "./controllers/course.controller.js";
 
 dotenv.config();
 const app = express();

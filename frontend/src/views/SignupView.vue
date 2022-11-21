@@ -101,9 +101,8 @@ export default {
     ...mapActions(["registerUser"]),
     async onSubmit(e) {
       e.preventDefault();
-      console.log("came here");
       this.processing = true;
-      if (!this.$refs.form.validate()) {
+      if (this.$refs.form.validate()) {
         await this.registerUser(this.newUser);
       }
       this.processing = false;

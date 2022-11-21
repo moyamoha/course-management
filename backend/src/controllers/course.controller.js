@@ -1,7 +1,7 @@
-import CourseService from '../services/course.services.js';
-import fs from 'fs';
-import path from 'path';
-import { promisify } from 'util';
+import CourseService from "../services/course.services.js";
+import fs from "fs";
+import path from "path";
+import { promisify } from "util";
 
 const writeFile = promisify(fs.writeFile);
 
@@ -28,7 +28,7 @@ export const create = async (req, res, next) => {
 export const deleteCourse = async (req, res, next) => {
   const user = req.user;
   try {
-    await CourseService.deleteCourse(req.params['code'], user._id);
+    await CourseService.deleteCourse(req.params["code"], user._id);
     res.sendStatus(204);
   } catch (err) {
     next(err);
@@ -39,7 +39,7 @@ export const updateCourse = async (req, res, next) => {
   const user = req.user;
   try {
     const updated = await CourseService.updateCourse(
-      req.params['code'],
+      req.params["code"],
       user._id,
       req.body
     );
@@ -52,7 +52,7 @@ export const updateCourse = async (req, res, next) => {
 export const getCourse = async (req, res, next) => {
   const user = req.user;
   try {
-    const course = await CourseService.getCourse(req.params['code'], user._id);
+    const course = await CourseService.getCourse(req.params["code"], user._id);
     res.json(course);
   } catch (err) {
     next(err);
@@ -62,7 +62,7 @@ export const getCourse = async (req, res, next) => {
 export const sendJson = async (req, res, next) => {
   const home = process.cwd();
   const user = req.user;
-  const fileName = user.username + '_data.json';
+  const fileName = user.username + "_data.json";
   const filePath = path.join(home, fileName);
   try {
     const courses = await CourseService.getAll(user._id);
@@ -78,8 +78,8 @@ export const sendJson = async (req, res, next) => {
     await writeFile(filePath, JSON.stringify(content));
     const stream = fs.createReadStream(filePath);
     res.set({
-      'Content-Disposition': `attachment; filename='${fileName}'`,
-      'Content-Type': 'application/json',
+      "Content-Disposition": `attachment; filename='${fileName}'`,
+      "Content-Type": "application/json",
     });
     stream.pipe(res);
   } catch (err) {

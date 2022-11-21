@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const courseSchema = mongoose.Schema({
   name: {
@@ -18,7 +18,7 @@ const courseSchema = mongoose.Schema({
   language: {
     type: String,
     required: false,
-    default: 'Suomi',
+    default: "Suomi",
   },
   level: {
     type: String,
@@ -26,13 +26,13 @@ const courseSchema = mongoose.Schema({
   },
   scale: {
     type: String,
-    enum: ['Hylätty-Hyväksytty', 'Yleinen asteikko, 0-5'],
-    default: 'Yleinen asteikko, 0-5',
+    enum: ["Hylätty-Hyväksytty", "Yleinen asteikko, 0-5"],
+    default: "Yleinen asteikko, 0-5",
   },
   state: {
     type: String,
-    enum: ['completed', 'ongoing', 'notStarted'],
-    default: 'notStarted',
+    enum: ["completed", "ongoing", "notStarted"],
+    default: "notStarted",
   },
   result: {
     type: String,
@@ -40,9 +40,9 @@ const courseSchema = mongoose.Schema({
   },
   user_id: {
     type: mongoose.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
 });
 
-const courseModel = new mongoose.model('Course', courseSchema);
+const courseModel = new mongoose.model("Course", courseSchema);
 export default courseModel;

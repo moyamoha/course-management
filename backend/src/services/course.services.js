@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-import Course from '../models/course.model.js';
-import { BadRequestError, NotFoundError } from '../helpers/apiError.js';
+import Course from "../models/course.model.js";
+import { BadRequestError, NotFoundError } from "../helpers/apiError.js";
 
 const createCourse = async (course, userId) => {
   try {
@@ -14,7 +14,7 @@ const createCourse = async (course, userId) => {
   } catch (e) {
     console.log(e);
     throw new BadRequestError(
-      'Something is wrong with information you provided'
+      "Something is wrong with information you provided"
     );
   }
 };
@@ -22,7 +22,7 @@ const createCourse = async (course, userId) => {
 const getAll = async (userId) => {
   const courses = await Course.find({ user_id: userId });
   if (!courses) {
-    throw new NotFoundError('No courses found!');
+    throw new NotFoundError("No courses found!");
   }
   return courses;
 };
@@ -49,7 +49,7 @@ const updateCourse = async (courseCode, userId, update) => {
   const updated = Course.findOneAndUpdate(
     { code: courseCode, user_id: userId },
     update,
-    { returnDocument: 'after' }
+    { returnDocument: "after" }
   );
   if (!updated) {
     throw new NotFoundError(`Course ${code} not found!`);

@@ -1,8 +1,8 @@
-import winston from 'winston';
+import winston from "winston";
 
 const logger = winston.createLogger({
   transports: [
-    new winston.transports.File({ filename: 'debug.log', level: 'debug' }),
+    new winston.transports.File({ filename: "debug.log", level: "debug" }),
   ],
 });
 

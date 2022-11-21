@@ -30,7 +30,3 @@ The main purpose of making this app is however learning. I had heard of how love
 9. aws-sdk (s3 bucket for storing profile images)
 10. PassportJs (for authentication)
 11. Github actions
-
-## See it in action:
-
-Did this short introduction ignite your interest? See it [here](https://student.yahyasalimi.com)

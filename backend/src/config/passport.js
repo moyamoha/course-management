@@ -1,11 +1,11 @@
-import JwtStrategy, { ExtractJwt } from 'passport-jwt';
+import JwtStrategy, { ExtractJwt } from "passport-jwt";
 
-import User from '../models/user.model.js';
-import { JWT_SECRET } from '../utils/secrets.js';
+import User from "../models/user.model.js";
+import secrets from "../utils/secrets.js";
 
 export const jwtStrategy = new JwtStrategy.Strategy(
   {
-    secretOrKey: JWT_SECRET,
+    secretOrKey: secrets.jwtSecret,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   },
   async (payload, done) => {
@@ -13,7 +13,7 @@ export const jwtStrategy = new JwtStrategy.Strategy(
       const user = await User.findOne({ email: payload.email });
       done(null, user);
     } catch (err) {
-      done(new UnauthorizedError('You are not logged in'), null);
+      done(new UnauthorizedError("You are not logged in"), null);
     }
   }
 );

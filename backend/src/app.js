@@ -1,18 +1,17 @@
-import cors from 'cors';
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import passport from 'passport';
-import path from 'path';
+import cors from "cors";
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import passport from "passport";
+import path from "path";
 
-import apiErrorHandler from './middlewares/apiErrorHandler.js';
-import courseRouter from '../src/routers/course.router.js';
-import authRouter from './routers/auth.router.js';
-import { jwtStrategy } from './config/passport.js';
-import apiContentType from './middlewares/apiContentType.js';
-import { MONGODB_URI } from './utils/secrets.js';
-import logRequest from './middlewares/logRequest.js';
-import { sendJson } from './controllers/course.controller.js';
+import apiErrorHandler from "./middlewares/apiErrorHandler.js";
+import courseRouter from "../src/routers/course.router.js";
+import authRouter from "./routers/auth.router.js";
+import { jwtStrategy } from "./config/passport.js";
+import apiContentType from "./middlewares/apiContentType.js";
+import logRequest from "./middlewares/logRequest.js";
+// import { sendJson } from "./controllers/course.controller.js";
 
 dotenv.config();
 const app = express();
@@ -23,11 +22,6 @@ app.use(express.json());
 app.use(apiContentType);
 app.use(logRequest);
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`App is running on port ${port}`);
-});
-
 const CWD = process.cwd();
 
 // Passport settings
@@ -37,21 +31,19 @@ passport.use(jwtStrategy);
 app.use(express.static(process.cwd()));
 
 // Routes
-app.use('/api/v1/courses', courseRouter);
-app.use('/api/v1/auth', authRouter);
+app.use("/api/v1/courses", courseRouter);
+app.use("/api/v1/auth", authRouter);
 app.get(
-  '/api/v1/download',
-  passport.authenticate('jwt', { session: false }),
-  cors({ exposedHeaders: ['Content-Disposition'] }),
+  "/api/v1/download",
+  passport.authenticate("jwt", { session: false }),
+  cors({ exposedHeaders: ["Content-Disposition"] }),
   sendJson
 );
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(CWD, 'src/index.html'));
-});
-
-mongoose.connect(MONGODB_URI, () => {
-  console.log('connected to database!');
+app.get("/", (req, res) => {
+  res.sendFile(path.join(CWD, "src/index.html"));
 });
 
 app.use(apiErrorHandler);
+
+export default app;

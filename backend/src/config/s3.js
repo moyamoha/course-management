@@ -1,16 +1,12 @@
-import { S3Client } from '@aws-sdk/client-s3';
-import {
-  AWS_BUCKET_REGION,
-  AWS_ACCESS_KEY_ID,
-  AWS_SECRET_ACCESS_KEY,
-} from '../utils/secrets.js';
+import { S3Client } from "@aws-sdk/client-s3";
+import secrets from "../utils/secrets.js";
 
 const credentials = {
-  accessKeyId: AWS_ACCESS_KEY_ID,
-  secretAccessKey: AWS_SECRET_ACCESS_KEY,
+  accessKeyId: secrets.awsAccessKeyId,
+  secretAccessKey: secrets.awsSecretAccessKey,
 };
 const client = new S3Client({
-  region: AWS_BUCKET_REGION,
+  region: secrets.awsBucketRegion,
   credentials: credentials,
 });
 

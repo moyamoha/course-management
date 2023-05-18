@@ -4,21 +4,7 @@
       <v-col> Here you can change your profile picture </v-col>
     </v-row>
     <v-row class="d-flex flex-column">
-      <v-col md="4" sm="5" class="d-flex flex-column align-center">
-        <img
-          width="100%"
-          height="100%"
-          class="rounded-lg"
-          :src="profilePicUrl"
-        />
-        <v-file-input
-          prepend-icon="mdi-camera"
-          block
-          hide-input
-          v-model="profileImg"
-          @change="onchange"
-        ></v-file-input>
-      </v-col>
+      <v-col md="4" sm="5" class="d-flex flex-column align-center"> </v-col>
       <v-col class="d-md-flex" md="8">
         <v-col md="4">
           <div class="d-flex flex-column">
@@ -45,20 +31,8 @@
 import { mapActions, mapGetters } from "vuex";
 import ProfileSection from "@/components/ProfileSection.vue";
 export default {
-  data() {
-    return {
-      profileImg: null,
-    };
-  },
-  methods: {
-    ...mapActions(["setProfile"]),
-    onchange() {
-      this.setProfile(this.profileImg);
-    },
-  },
   computed: {
-    ...mapGetters(["loggedInUser", "profilePicUrl"]),
+    ...mapGetters(["loggedInUser"]),
   },
-  components: { ProfileSection },
 };
 </script>

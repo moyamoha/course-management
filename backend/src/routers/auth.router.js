@@ -14,17 +14,4 @@ const authRouter = express.Router();
 authRouter.post("/register-user", registerUser);
 authRouter.post("/login", login);
 
-authRouter.put(
-  "/set-profile",
-  upload.single("profile"),
-  passport.authenticate("jwt", { session: false }),
-  setProfile
-);
-
-authRouter.get(
-  "/images/:key",
-  passport.authenticate("jwt", { session: false }),
-  getProfile
-);
-
 export default authRouter;

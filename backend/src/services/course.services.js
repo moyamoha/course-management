@@ -12,7 +12,6 @@ const createCourse = async (course, userId) => {
     newCourse = await newCourse.save();
     return newCourse;
   } catch (e) {
-    console.log(e);
     throw new BadRequestError(
       "Something is wrong with information you provided"
     );

@@ -43,6 +43,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(CWD, "src/index.html"));
 });
 
-app.use(apiErrorHandler);
+// app.use(apiErrorHandler);
 
 export default app;

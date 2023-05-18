@@ -2,13 +2,10 @@ import bcrypt from "bcrypt";
 import fs from "fs";
 import util from "util";
 import jwt from "jsonwebtoken";
-import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 import User from "../models/user.model.js";
 import UserServices from "../services/user.services.js";
 import secrets from "../utils/secrets.js";
-import s3Client from "../config/s3.js";
 
 const unlinkFile = util.promisify(fs.unlink);
 
@@ -53,6 +50,7 @@ export const login = async (req, res) => {
     user = await User.findOne({
       username: username,
     });
+    console.log(user);
     if (!user) {
       res.status(401).json({
         message: "Wrong credentials. Please check your username and password",
@@ -61,17 +59,18 @@ export const login = async (req, res) => {
     }
     try {
       if (await bcrypt.compare(password, user.password)) {
+        console.log("tuli tänne");
         const token = jwt.sign(
           JSON.stringify({
             _id: user._id,
             name: user.firstname + " " + user.lastname,
             email: user.email,
             dateJoined: user.dateJoined,
-            profile: user.profile,
           }),
-          JWT_SECRET
+          secrets.jwtSecret
         );
-        res.status(200).json({
+        console.log("vielä tänne");
+        res.json({
           token: token,
         });
       }

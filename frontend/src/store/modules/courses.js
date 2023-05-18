@@ -14,6 +14,7 @@ const getters = {
 const actions = {
   async fetchCourses({ commit }) {
     const res = await axios.get("/courses/");
+    console.log(res.data);
     commit("setCourses", res.data);
   },
 

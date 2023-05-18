@@ -5,7 +5,7 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://course-management.onrender.com/api/v1";
+axios.defaults.baseURL = "http://localhost:5000/api/v1";
 axios.interceptors.request.use((request) => {
   const token = localStorage.getItem("token");
   if (token) {

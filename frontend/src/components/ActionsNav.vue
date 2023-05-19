@@ -4,8 +4,6 @@
     <v-list-item @click="goToDashboard">Main</v-list-item>
     <v-list-item @click="goToAll">View all</v-list-item>
     <v-list-item @click="goToNew">Create course</v-list-item>
-    <v-list-item @click="goToStats">Stats</v-list-item>
-    <v-list-item @click="importData">Import data</v-list-item>
   </v-list>
 </template>
 
@@ -24,12 +22,6 @@ export default {
     },
     goToNew() {
       router.push("/dashboard/new");
-    },
-    goToStats() {
-      router.push("/dashboard/stats");
-    },
-    importData() {
-      this.downloadJson();
     },
   },
   components: {

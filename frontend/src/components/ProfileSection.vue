@@ -1,9 +1,6 @@
 <template>
   <v-list-group>
     <template v-slot:activator>
-      <v-list-item-icon>
-        <v-avatar size="40"><img :src="profilePicUrl" /></v-avatar>
-      </v-list-item-icon>
       <v-list-item-content>
         <v-list-item-title>{{ loggedInUser.name }}</v-list-item-title>
       </v-list-item-content>

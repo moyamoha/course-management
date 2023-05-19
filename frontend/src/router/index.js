@@ -7,11 +7,9 @@ import NewCourseView from "../views/NewCourseView.vue";
 import SettingsView from "../views/SettingsView.vue";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
-import Stats from "@/views/StatsView.vue";
 import Signup from "@/views/SignupView.vue";
 import SingleCourse from "@/views/SingleCourseView.vue";
 import MainBaseView from "@/views/MainBaseView.vue";
-import Contact from "@/views/ContactView.vue";
 
 Vue.use(VueRouter);
 
@@ -23,10 +21,6 @@ const routes = [
       {
         path: "",
         component: HomeView,
-      },
-      {
-        path: "contact",
-        component: Contact,
       },
     ],
   },
@@ -54,10 +48,6 @@ const routes = [
       {
         path: "new",
         component: NewCourseView,
-      },
-      {
-        path: "stats",
-        component: Stats,
       },
     ],
   },

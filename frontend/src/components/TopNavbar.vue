@@ -14,9 +14,6 @@
           >Course Manager</v-btn
         >
       </v-toolbar-title>
-      <div class="flex">
-        <v-btn @click="goToContacts" text small>Contact</v-btn>
-      </div>
       <v-spacer></v-spacer>
       <ThemeChanger class="mr-1"></ThemeChanger>
     </v-toolbar>
@@ -29,9 +26,6 @@ import ThemeChanger from "@/components/ThemeChanger.vue";
 
 export default {
   methods: {
-    goToContacts() {
-      router.push("/contact");
-    },
     goToHomePage() {
       router.push("/");
     },

@@ -65,9 +65,6 @@ export default {
     },
   },
   computed: { ...mapGetters(["allCourses"]) },
-  mounted() {
-    console.log(this.allCourses);
-  },
 };
 </script>
 

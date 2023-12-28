@@ -14,7 +14,6 @@ const getters = {
 const actions = {
   async fetchCourses({ commit }) {
     const res = await axios.get("/courses/");
-    console.log(res.data);
     commit("setCourses", res.data);
   },
 
@@ -42,7 +41,6 @@ const actions = {
       commit("setCourseError", "");
       router.push("/dashboard/all");
     } catch (err) {
-      console.log(err);
       commit("setCourseError", err.response.data.message);
     }
   },
@@ -90,9 +88,7 @@ const actions = {
       document.body.appendChild(fileLink);
       fileLink.click();
       fileLink.remove();
-    } catch (err) {
-      console.log(err.response.data.message);
-    }
+    } catch (err) {}
   },
 };
 

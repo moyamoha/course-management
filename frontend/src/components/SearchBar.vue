@@ -17,7 +17,7 @@ export default {
   }),
   methods: {
     handleSubmit() {
-      console.log(this.query);
+      // (this.query);
     },
   },
 };

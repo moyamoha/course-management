@@ -69,7 +69,6 @@ export const login = async (req, res) => {
           }),
           secrets.jwtSecret
         );
-        console.log("vielä tänne");
         res.json({
           token: token,
         });

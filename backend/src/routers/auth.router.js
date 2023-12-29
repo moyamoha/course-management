@@ -1,17 +1,19 @@
 import express from "express";
 import passport from "passport";
-import multer from "multer";
-const upload = multer({ dest: "uploads/" });
 
 import {
+  changeUserName,
   login,
   registerUser,
-  setProfile,
-  getProfile,
 } from "../controllers/auth.controller.js";
 
 const authRouter = express.Router();
 authRouter.post("/register-user", registerUser);
 authRouter.post("/login", login);
+authRouter.patch(
+  "/change-name",
+  passport.authenticate("jwt", { session: false }),
+  changeUserName
+);
 
 export default authRouter;

@@ -9,10 +9,12 @@ const userSchema = new mongoose.Schema({
   lastname: {
     type: String,
     required: false,
+    minlength: 3,
   },
   firstname: {
     type: String,
     required: false,
+    minlength: 3,
   },
   dateJoined: {
     type: Date,

@@ -7,7 +7,6 @@ const state = {
   user: null,
   loginError: "",
   signupError: "",
-  profileUrl: "",
 };
 
 const getters = {
@@ -15,7 +14,6 @@ const getters = {
   loggedInUser: (state) => state.user,
   loginError: (state) => state.loginError,
   signupError: (state) => state.signupError,
-  profilePicUrl: (state) => state.profileUrl,
 };
 
 const actions = {
@@ -53,6 +51,16 @@ const actions = {
       commit("setSignupError", err.response.data.message);
     }
   },
+
+  async changeName({ commit, state }, name) {
+    try {
+      await axios.patch("/auth/change-name", name);
+      commit("setUser", {
+        ...state.user,
+        name: `${name.firstname} ${name.lastname}`,
+      });
+    } catch (error) {}
+  },
 };
 
 const mutations = {
@@ -62,7 +70,6 @@ const mutations = {
   },
   setLoginError: (state, error) => (state.loginError = error),
   setSignupError: (state, error) => (state.signupError = error),
-  setProfileUrl: (state, url) => (state.profileUrl = url),
 };
 
 export default {

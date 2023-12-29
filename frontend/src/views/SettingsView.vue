@@ -9,7 +9,7 @@
         <v-col md="4">
           <div class="d-flex flex-column">
             <label class="mb-2 text-subtitle-2">Name</label>
-            <span>{{ loggedInUser.name }}</span>
+            <Name></Name>
           </div>
         </v-col>
         <v-col class="d-flex flex-column" md="5">
@@ -30,9 +30,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import ProfileSection from "@/components/ProfileSection.vue";
+import Name from "@/components/Name.vue";
 export default {
   computed: {
     ...mapGetters(["loggedInUser"]),
   },
+  components: { Name },
 };
 </script>

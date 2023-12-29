@@ -10,10 +10,8 @@
 <script>
 import router from "@/router";
 import ProfileSection from "./ProfileSection.vue";
-import { mapActions } from "vuex";
 export default {
   methods: {
-    ...mapActions(["downloadJson"]),
     goToDashboard() {
       router.push("/dashboard");
     },
